@@ -19,6 +19,12 @@ public class CurricProj {
         println("Invalid input, resetting.");
         main(new String[0]);
         }
+        else if(uI == 1){
+        //invoke class.method
+        }
+        else{
+        System.exit(0);
+        }
         
         println("Curriculum Viewer v0.1\n1. Create Schedule\n2. Create current progress\n3. View required classes");
         int uI2 = userInput.nextByte();
@@ -27,5 +33,9 @@ public class CurricProj {
     
     public static void println(String args) {
         System.out.println(args);
+}
+    
+    public static void print(String args) {
+        System.out.print(args);
 }
 }
