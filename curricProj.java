@@ -11,10 +11,17 @@ public class CurricProj {
     public static void main(String[] args) {
         //Declare variables
         Scanner userInput = new Scanner(System.in);
-        println("Curriculum Viewer v0.1\n1. Create current progress\n2.Exit");
-        String uI = userInput.next();
+        
+        println("Curriculum Viewer v0.1\n1. Create current progress\n2. Exit");
+        int uI = userInput.nextByte();
+        
+        if(uI <= 0 || uI > 2){
+        println("Invalid input, resetting.");
+        main(new String[0]);
+        }
+        
         println("Curriculum Viewer v0.1\n1. Create Schedule\n2. Create current progress\n3. View required classes");
-        String uI2 = userInput.next();
+        int uI2 = userInput.nextByte();
     }
     
     
@@ -22,4 +29,3 @@ public class CurricProj {
         System.out.println(args);
 }
 }
-
