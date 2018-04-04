@@ -21,13 +21,19 @@ public class CurricProj {
         }
         else if(uI == 1){
         //invoke class.method
+        classCategories.bla();
+                println("1. Create Schedule\n2. View required classes");
+                int uI2 = userInput.nextByte();
+
+                if(uI2 == 1){
+                    currentProgress.view();
+        }
         }
         else{
         System.exit(0);
         }
         
-        println("Curriculum Viewer v0.1\n1. Create Schedule\n2. Create current progress\n3. View required classes");
-        int uI2 = userInput.nextByte();
+        
     }
     
     
