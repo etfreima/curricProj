@@ -14,56 +14,57 @@ public class Audit_Marsh {
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
-        int inputCredits = 0;
-        int creditsFinished = 0;
-        int totalCredits = 128;
-        String input = "";
-        String[] tokens;
+        int inputCredits = 0;       // creates variable for credits taken
+        int creditsFinished = 0;    //creates variable for credits taken after adding up
+        int totalCredits = 128;     //variable for all credits
+        String input = "";          
+        String[] tokens;            //creates list for classes taken
         String key = "";
 
-        loadMapWithClasses();
+        loadMapWithClasses();       //creates a class to load the classes taken into list
 
-        System.out.println("How many credits have you taken in CET?");
-        inputCredits = stdin.nextInt();
-        input = stdin.nextLine();
+        System.out.println("How many credits have you taken in CET?");  //asks how many credits taken
+        inputCredits = stdin.nextInt();                                 //the input for credits taken
+        input = stdin.nextLine();                                       //gathers class names of taken
 
         System.out.println("Use the following format: CET 1010");
-        System.out.println("Please enter the courses you have completed, followed by a \"q\": ");
+        System.out.println("Please enter the courses you have completed, followed by a \"q\": "); // creates variable to break while loop below
 
         while (true) {
-            input = stdin.nextLine();
+            input = stdin.nextLine();   // while loop for inputing class names
 
-            if (input.equalsIgnoreCase("q")) {
+            if (input.equalsIgnoreCase("q")) {              // creates break point for the list 
                 break;
             }
 
-            tokens = input.split("\\s+");
-            key = tokens[0] + tokens[1];
+            tokens = input.split("\\s+");                   // eliminates spaces in class name and number
+            key = tokens[0] + tokens[1];                    // corrects format of name and number
 
-            if (CETDegree.containsKey(key)) {
-                creditsFinished += CETDegree.get(key);
-                CETDegree.remove(key);
+            if (CETDegree.containsKey(key)) {               //checks if the class is in the list below
+                creditsFinished += CETDegree.get(key);      // sum of credits taken
+                CETDegree.remove(key);                      // removes class from the key below
             }
         }
 
-        System.out.println("Finished Credits: " + creditsFinished);
+        System.out.println("Finished Credits: " + creditsFinished);         // prints credits taken
         
-        System.out.println("You must complete the following courses: ");
+        System.out.println("You must complete the following courses: ");    // prints the comment
         
         int creditsRemaining = 0;
-        Iterator it = CETDegree.entrySet().iterator();
+        Iterator it = CETDegree.entrySet().iterator();                      // calls CETdegree method
         while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
+            Map.Entry pair = (Map.Entry) it.next();                          
             System.out.println(pair.getKey() + " = " + pair.getValue());
-            creditsRemaining += Integer.parseInt(pair.getValue().toString());
-            it.remove(); // avoids a ConcurrentModificationException
+            creditsRemaining += Integer.parseInt(pair.getValue().toString());   // prints credits remaining in key
+            it.remove(); // avoids a ConcurrentModificationException            // removes classes taken from key
             
             
         }
         
-        System.out.println("You have " + creditsRemaining + " credits left");
+        System.out.println("You have " + creditsRemaining + " credits left");   // prints credits left
 
     }
+        // below is the key of classes 
 
     public static void loadMapWithClasses() {
         CETClass IntroToCon = new CETClass("CET", "1010", "Intro. to COnstruction");
