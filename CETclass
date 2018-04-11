@@ -1,0 +1,17 @@
+package audit_marsh;
+
+/**
+ *
+ * @author zachary berry
+ */
+
+public class CETClass {
+    String dept, courseNum, name;
+    
+    public CETClass(String dept, String courseNum, String name) {
+        this.dept = dept;
+        this.courseNum = courseNum;
+        this.name = name;
+    }
+    
+}
