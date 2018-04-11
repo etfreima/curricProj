@@ -1,0 +1,114 @@
+package audit_marsh;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Audit_Marsh {
+    
+    
+    //CETClass.name, credit hours
+
+    static Map<String, Integer> CETDegree = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner stdin = new Scanner(System.in);
+        int inputCredits = 0;
+        int creditsFinished = 0;
+        int totalCredits = 128;
+        String input = "";
+        String[] tokens;
+        String key = "";
+
+        loadMapWithClasses();
+
+        System.out.println("How many credits have you taken in CET?");
+        inputCredits = stdin.nextInt();
+        input = stdin.nextLine();
+
+        System.out.println("Use the following format: CET 1010");
+        System.out.println("Please enter the courses you have completed, followed by a \"q\": ");
+
+        while (true) {
+            input = stdin.nextLine();
+
+            if (input.equalsIgnoreCase("q")) {
+                break;
+            }
+
+            tokens = input.split("\\s+");
+            key = tokens[0] + tokens[1];
+
+            if (CETDegree.containsKey(key)) {
+                creditsFinished += CETDegree.get(key);
+                CETDegree.remove(key);
+            }
+        }
+
+        System.out.println("Finished Credits: " + creditsFinished);
+        
+        System.out.println("You must complete the following courses: ");
+        
+        int creditsRemaining = 0;
+        Iterator it = CETDegree.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            creditsRemaining += Integer.parseInt(pair.getValue().toString());
+            it.remove(); // avoids a ConcurrentModificationException
+            
+            
+        }
+        
+        System.out.println("You have " + creditsRemaining + " credits left");
+
+    }
+
+    public static void loadMapWithClasses() {
+        CETClass IntroToCon = new CETClass("CET", "1010", "Intro. to COnstruction");
+        CETDegree.put(IntroToCon.dept + IntroToCon.courseNum, 1);
+
+        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+        CETDegree.put(IntroToEng.dept + IntroToCon.courseNum, 1);
+
+        CETClass Trig = new CETClass("MATH", "1330", "Trigonometry");
+        CETDegree.put(Trig.dept + Trig.courseNum, 3);
+
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+//        CETClass IntroToEng = new CETClass("ENGT", "1000", "Intro. to Engr. Tech.");
+//        CETDegree.put(IntroToEng.name, 1);
+//        
+    }
+
+}
